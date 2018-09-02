@@ -74,3 +74,6 @@
      Runs unit tests
      
      
+### MIT License
+
+  - https://github.com/lleocastro/react-redux-starter/blob/master/LICENSE

@@ -42,11 +42,11 @@ module.exports = {
     {
       test: /\.scss$/,
       exclude: /\.module\.scss$/,
-      loaders: ["style", "css", "sass"]
+      loaders: ['style', 'css', 'sass']
     },
     {
       test: /\.css$/,
-      loader: "style-loader!css-loader"
+      loader: 'style-loader!css-loader'
     },
     {
       test: /\.(jpg|png)$/,
@@ -54,11 +54,11 @@ module.exports = {
     },
     {
       test: /\.woff(2)?(\?v=[0-9].[0-9].[0-9])?$/,
-      loader: "url-loader?mimetype=application/font-woff"
+      loader: 'url-loader?mimetype=application/font-woff'
     },
     {
       test: /\.(ttf|eot|svg)(\?v=[0-9].[0-9].[0-9])?$/,
-      loader: "file-loader?name=[name].[ext]"
+      loader: 'file-loader?name=[name].[ext]'
     }
     ]
   },
@@ -66,12 +66,14 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
     alias: {
       appRoot: path.resolve(ROOT_PATH, 'app/src')
-    },
+    }
   },
   output: {
-    path: (process.env.NODE_ENV === 'production') ? path.resolve(ROOT_PATH, 'app/dist') : path.resolve(ROOT_PATH, 'app/public'),
+    path: (process.env.NODE_ENV === 'production')
+    ? path.resolve(ROOT_PATH, 'app/dist')
+    : path.resolve(ROOT_PATH, 'app/public'),
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: 'bundle.js'
   },
   devServer: {
     contentBase: path.resolve(ROOT_PATH, 'app/public'),

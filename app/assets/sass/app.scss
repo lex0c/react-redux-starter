@@ -1,0 +1,37 @@
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in source scss files.
+
+$color__primary: #111111;
+
+
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+
+// @import "";
+
+
+// App Android Variables
+// --------------------------------------------------
+// Android only Sass variables can go here
+
+// @import "";
+
+
+// App Theme
+// --------------------------------------------------
+// Apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and defaults
+// are overridden.
+
+// @import "";
+
+
+
+// Thirdparty utilities
+// ...
+
+@import "./thirdparty/balloon.scss";

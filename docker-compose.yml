@@ -6,11 +6,11 @@ networks:
 services:
 
   app:
-    dockerfile: Dockerfile
+    build: .
     container_name: app
     volumes:
-      - ./:/var/www/html/
-    working_dir: /var/www/html/
+      - ./:/var/www/html
+    working_dir: /var/www/html
     command: bash -c "npm install && npm run deploy"
     networks:
       - web
@@ -19,7 +19,7 @@ services:
     image: nginx:1.13
     container_name: webserver
     volumes:
-      - ./:/var/www/html
+      - ./app/dist:/var/www/html
       # Configuração para o proxy reveso
       - ./default.conf:/etc/nginx/conf.d/default.conf
     networks:

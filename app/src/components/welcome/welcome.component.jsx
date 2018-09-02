@@ -14,8 +14,8 @@ class WelcomeComponent extends Component {
   render() {
     return (
       <div>
-        <h1 className="red">React+Redux Starter</h1>
-        <p>{this.props.message}</p>
+        <h1 className="red fs-29 mt-3">React+Redux Starter</h1>
+        <p data-balloon="Whats up!" data-balloon-pos="down">{this.props.message}</p>
         <input onChange={this.props.textUpdate} value={this.props.message}/>
       </div>
     );

@@ -1,13 +1,15 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
-import promiseMiddleware from 'redux-promise-middleware';
 import { reducer as formReducer } from 'redux-form';
 import { browserHistory } from 'react-router';
 import createLogger from 'redux-logger';
+import promise from 'redux-promise';
 import thunk from 'redux-thunk';
 
+import DevTools from './utils/devtools';
+
 // Reducers
-import welcomeReducer from './components/welcome/welcome.reducer';
+import rootReducers from './root.reducer';
 
 
 /*
@@ -16,7 +18,7 @@ import welcomeReducer from './components/welcome/welcome.reducer';
  *
  */
 const loggerMiddleware = createLogger();
-const middlewares = [thunk, promiseMiddleware(), loggerMiddleware];
+const middlewares = [thunk, loggerMiddleware];
 
 /*
  * Redux devtools
@@ -24,31 +26,32 @@ const middlewares = [thunk, promiseMiddleware(), loggerMiddleware];
  *
  */
 const enhancers = [];
-const devToolsExtension = window.devToolsExtension;
-
-if (typeof devToolsExtension === 'function') {
-  enhancers.push(devToolsExtension());
-}
+enhancers.push(DevTools.instrument());
 
 const composedEnhancers = compose(applyMiddleware(...middlewares), ...enhancers);
 
 /*
- * See: https://github.com/reactjs/redux/blob/master/docs/api/createStore.md
  * See: https://github.com/reduxjs/redux/blob/master/docs/api/combineReducers.md
  *
  */
-const store = createStore(
-  combineReducers({
-    welcomeReducer,
-    routing: routerReducer,
-    form: formReducer,
-    composedEnhancers
-  })
-);
+const reducers = combineReducers({
+  ...rootReducers,
+  routing: routerReducer,
+  form: formReducer,
+  composedEnhancers
+});
+
+/*
+ * See: https://github.com/reactjs/redux/blob/master/docs/api/createStore.md
+ *
+ */
+const store = applyMiddleware(promise)(createStore)(reducers);
 
 /*
  * See: https://github.com/reactjs/react-router-redux/issues/305
  *
  */
 export const history = syncHistoryWithStore(browserHistory, store);
+
+/** */
 export default store;

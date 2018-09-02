@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import * as actionCreators from './actionCreators';
+import * as actionCreators from './action-creator';
 
 /*
  * Map the global state to global props here.
